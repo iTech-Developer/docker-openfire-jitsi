@@ -8,7 +8,8 @@ MIN_PORT=${MIN_PORT:-50000}
 MAX_PORT=${MAX_PORT:-60000}
 ENABLE_JVB=${ENABLE_JVB:-true}
 SUBDOMAIN=${SUBDOMAIN:-jitsi-videobridge}
-
+XMS=${XMS:-32m}
+XMX=${XMX:-256m}
 
 chmod 775 /data
 mkdir -p /data/openfire
@@ -39,6 +40,8 @@ fi
 echo "Starting OpenFire ..."
 exec sudo -u openfire -H /usr/bin/java \
 -server \
+-Xms$XMS \
+-Xmx$XMX \
 -DopenfireHome=/usr/share/openfire \
 -Dopenfire.lib.dir=/usr/share/openfire/lib \
 -classpath /usr/share/openfire/lib/startup.jar \
