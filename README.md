@@ -19,7 +19,9 @@ To test jitsi video do the following:
 
 2- After configuring OpenFire for the first time, you need to restart the container.
 
-3- Go to **https://YOUR-DOMAIN:7443/jitsi/apps/ofmeet**
+3- Install the Jitsi Video Bridge plugin
+
+4- Go to **https://YOUR-DOMAIN:7443/jitsi/apps/ofmeet**
 
 --
 ## LICENSE
