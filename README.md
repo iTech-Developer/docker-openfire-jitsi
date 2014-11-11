@@ -12,8 +12,16 @@ To quickly run it (using --net=host because lots of ports need to be exposed and
 -
 ### Usage
 
-Go to http://YOUR-DOMAIN:9090/ to complete the installation
-To test jitsi video go to https://YOUR-DOMAIN:7443/jitsi/apps/ofmeet
+Go to **http://YOUR-DOMAIN:9090/** to complete the installation
+To test jitsi video do the following:
+
+1- Enable external components from Server -> Server Settings -> External Components, the secret must be the same as what you pass as environment variable (default: secret)
+
+2- After configuring OpenFire for the first time, you need to restart the container.
+
+3- Install the Jitsi Video Bridge plugin
+
+4- Go to **https://YOUR-DOMAIN:7443/jitsi/apps/ofmeet**
 
 --
 ## LICENSE
