@@ -1,0 +1,50 @@
+#!/bin/bash
+set -e
+
+DOMAIN=${DOMAIN:-localhost}
+SECRET=${SECRET:-secret}
+EXT_PORT=${EXT_PORT:-5275}
+MIN_PORT=${MIN_PORT:-50000}
+MAX_PORT=${MAX_PORT:-60000}
+ENABLE_JVB=${ENABLE_JVB:-true}
+SUBDOMAIN=${SUBDOMAIN:-jitsi-videobridge}
+XMS=${XMS:-32m}
+XMX=${XMX:-256m}
+
+
+chmod 775 /data
+mkdir -p /data/openfire
+chown -R openfire:openfire /data/openfire
+
+# use default openfire configuration if not exists in /data/openfire
+if [ ! -d /data/openfire/etc ]; then
+mv /etc/openfire /data/openfire/etc
+fi
+rm -rf /etc/openfire
+ln -sf /data/openfire/etc /etc/openfire
+
+if [ ! -d /data/openfire/lib ]; then
+mv /var/lib/openfire /data/openfire/lib
+fi
+rm -rf /var/lib/openfire
+ln -sf /data/openfire/lib /var/lib/openfire
+
+if [ "$ENABLE_JVB" = true ] ; then
+    echo 'Enabling Jitsi VideoBridge ...'
+    chown -R openfire:openfire /opt/jitsi
+    # run jitsi video bridge after 30 seconds to make sure OpenFire started
+    sh -c "(sleep 30; sudo -u openfire /opt/jitsi/jvb.sh --secret=$SECRET --domain=$DOMAIN \
+                 --port=$EXT_PORT --min-port=$MIN_PORT --max-port=$MAX_PORT \
+                 --subdomain=$SUBDOMAIN)&"
+fi
+
+
+echo "Starting OpenFire ..."
+exec sudo -u openfire -H /usr/bin/java \
+-server \
+-Xms$XMS \
+-Xmx$XMX \
+-DopenfireHome=/usr/share/openfire \
+-Dopenfire.lib.dir=/usr/share/openfire/lib \
+-classpath /usr/share/openfire/lib/startup.jar \
+-jar /usr/share/openfire/lib/startup.jar
