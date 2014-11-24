@@ -12,7 +12,7 @@ RUN apt-get update \
  && wget --no-verbose "https://download.jitsi.org/jitsi-videobridge/linux/jitsi-videobridge-linux-x64-${VIDEOBRIDGE_VERSION}.zip" \
       -O /tmp/videobridge.zip \
  && unzip /tmp/videobridge.zip -d /opt/ \
- && mv /opt/jitsi-videobridge-linux-x64-${VIDEOBRIDGE_VERSION} /opt/jitsi \
+ && mv /opt/jitsi-videobridge-linux-x64-${VIDEOBRIDGE_VERSION} /opt/jitsi \ 
  && rm -rf /tmp/* \
  && apt-get purge --auto-remove -y wget unzip \
  && rm -rf /var/lib/apt/lists/*

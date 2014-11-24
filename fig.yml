@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 server:
   image: itech/openfire-jitsi:latest
   ports:
@@ -19,3 +20,8 @@ server:
     - VIRTUAL_PORT=9090
 
 # Allow anonymous login for the ofmeet to work
+=======
+openfire:
+  image: itech/openfire-jitsi:latest
+  net: "host"
+>>>>>>> e36f121c04c39b9db22262e3affd15e39c433054
