@@ -2,7 +2,7 @@ FROM debian:jessie
 MAINTAINER itech
 
 ENV OPENFIRE_VERSION 3.9.3
-ENV VIDEOBRIDGE_VERSION 346
+ENV VIDEOBRIDGE_VERSION 370
 
 RUN apt-get update \
  && apt-get install --no-install-recommends -y sudo wget openjdk-7-jre unzip\
