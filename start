@@ -11,10 +11,6 @@ SUBDOMAIN=${SUBDOMAIN:-jitsi-videobridge}
 XMS=${XMS:-32m}
 XMX=${XMX:-256m}
 
-<<<<<<< HEAD
-
-=======
->>>>>>> e36f121c04c39b9db22262e3affd15e39c433054
 chmod 775 /data
 mkdir -p /data/openfire
 chown -R openfire:openfire /data/openfire
@@ -25,10 +21,7 @@ mv /etc/openfire /data/openfire/etc
 fi
 rm -rf /etc/openfire
 ln -sf /data/openfire/etc /etc/openfire
-<<<<<<< HEAD
 
-=======
->>>>>>> e36f121c04c39b9db22262e3affd15e39c433054
 if [ ! -d /data/openfire/lib ]; then
 mv /var/lib/openfire /data/openfire/lib
 fi
@@ -36,11 +29,7 @@ rm -rf /var/lib/openfire
 ln -sf /data/openfire/lib /var/lib/openfire
 
 if [ "$ENABLE_JVB" = true ] ; then
-<<<<<<< HEAD
     echo 'Enabling Jitsi VideoBridge ...'
-=======
-    echo 'Starting Jitsi VideoBridge ...'
->>>>>>> e36f121c04c39b9db22262e3affd15e39c433054
     chown -R openfire:openfire /opt/jitsi
     # run jitsi video bridge after 30 seconds to make sure OpenFire started
     sh -c "(sleep 30; sudo -u openfire /opt/jitsi/jvb.sh --secret=$SECRET --domain=$DOMAIN \
@@ -58,7 +47,3 @@ exec sudo -u openfire -H /usr/bin/java \
 -Dopenfire.lib.dir=/usr/share/openfire/lib \
 -classpath /usr/share/openfire/lib/startup.jar \
 -jar /usr/share/openfire/lib/startup.jar
-<<<<<<< HEAD
-=======
-
->>>>>>> e36f121c04c39b9db22262e3affd15e39c433054
